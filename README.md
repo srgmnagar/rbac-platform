@@ -1,4 +1,30 @@
 # RBAC Platform — Centralized Authorization System
+Phase 1: PostgreSQL Migration
+   └─ Why: Foundation for multi-app support
+
+Phase 2: Redis Caching (SDK Perspective)
+   └─ Why: SDK must be FAST for third-party apps
+   └─ Focus: Cache permission queries aggressively
+
+Phase 3: JWT Authentication (SDK Perspective)
+   └─ Why: SDK must be SECURE for third-party apps
+   └─ Focus: Token lifecycle in SDK, not just backend
+
+Phase 4: Production-Grade SDK
+   ├─ Error handling (what if backend down?)
+   ├─ Retry logic (transient failures)
+   ├─ Offline mode (use cached perms if backend unavailable)
+   ├─ Logging (debug issues)
+   ├─ Thread safety (multiple apps using SDK)
+   ├─ Hooks/extensibility (custom logic)
+   └─ PyPI package (other teams can `pip install rbac-sdk`)
+
+Phase 5: Admin UI Enhancements
+   └─ Make role/perm config super easy
+
+Phase 6: Monitoring & Observability
+   └─ SDK metrics (cache hit rate, latency)
+   └─ Backend metrics (API response times)
 
 ## What Is This?
 
@@ -144,6 +170,21 @@ rbac-platform/
 | Admin | ✅ | ✅ | ✅ | ✅ |
 | Manager | ✅ | ✅ | ❌ | ❌ |
 | Employee | ✅ | ❌ | ❌ | ❌ |
+
+
+
+
+Users
+User IDRolealice@org.comAdminbob@org.comManagercharlie@org.comEmployee
+
+Roles
+IDRoleDescription1AdminFull system access2ManagerCan view reports and approve requests3EmployeeCan view own reports
+
+Permissions
+IDPermissionDescription1view_reportsCan view reports2approve_requestsCan approve requests3delete_userCan delete users4edit_roleCan edit roles
+
+
+Any users you added after (like dave@org.com) would be in addition to these. Check via:
 
 ---
 
