@@ -1,27 +1,16 @@
-﻿import os
-from dotenv import load_dotenv
+import os
 
-# Load .env file if it exists (local development)
-load_dotenv()
+# This gives you the absolute path to the backend/ folder
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class Config:
-    # Database - MUST be set in environment / .env file
-    DATABASE_URL = os.getenv("DATABASE_URL")
-    if not DATABASE_URL:
-        raise RuntimeError(
-            "DATABASE_URL environment variable is not set. "
-            "Copy .env.example to .env and fill in your values."
-        )
-
-    # API key - MUST be set in environment / .env file
-    API_KEY = os.getenv("API_KEY")
-    if not API_KEY:
-        raise RuntimeError(
-            "API_KEY environment variable is not set. "
-            "Copy .env.example to .env and fill in your values."
-        )
-
-    # Server (safe defaults - not secrets)
+    # Database — always creates rbac.db inside backend/
+    DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{os.path.join(BASE_DIR, 'rbac.db')}")
+    
+    # API
+    API_KEY = os.getenv("API_KEY", "dev-key-12345")
+    
+    # Server
     HOST = os.getenv("HOST", "0.0.0.0")
     PORT = int(os.getenv("PORT", 8000))
 
