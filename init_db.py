@@ -1,4 +1,4 @@
-from backend.database import Base, engine, SessionLocal
+﻿from backend.database import Base, engine, SessionLocal
 from backend.models import Role, Permission, user_roles, role_permissions
 
 def init_db():
@@ -7,7 +7,7 @@ def init_db():
     # Create all tables
     print("Creating tables...")
     Base.metadata.create_all(bind=engine)
-    print("✓ Tables created")
+    print("Tables created")
     
     # Get database session
     db = SessionLocal()
@@ -23,7 +23,7 @@ def init_db():
         db.add(manager_role)
         db.add(employee_role)
         db.commit()
-        print("✓ Roles created")
+        print("Roles created")
         
         # Create Permissions
         print("Creating permissions...")
@@ -37,7 +37,7 @@ def init_db():
         db.add(delete_user_perm)
         db.add(edit_role_perm)
         db.commit()
-        print("✓ Permissions created")
+        print("Permissions created")
         
         # Assign permissions to roles
         print("Assigning permissions to roles...")
@@ -56,7 +56,7 @@ def init_db():
         employee_role.permissions.append(view_reports_perm)
         
         db.commit()
-        print("✓ Permissions assigned to roles")
+        print("Permissions assigned to roles")
         
         # Assign users to roles
         print("Assigning users to roles...")
@@ -71,7 +71,7 @@ def init_db():
         db.execute(stmt)
         
         db.commit()
-        print("✓ Users assigned to roles")
+        print("Users assigned to roles")
         
         print("\n" + "="*50)
         print("Database initialization complete!")
@@ -94,7 +94,7 @@ def init_db():
         
     except Exception as e:
         db.rollback()
-        print(f"✗ Error: {str(e)}")
+        print(f"Error: {str(e)}")
         raise
     finally:
         db.close()

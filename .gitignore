@@ -1,23 +1,24 @@
-@"
-# Virtual Environment
+﻿# Virtual Environment
 .venv/
 venv/
 env/
 
-# Database
+# Secrets - NEVER commit these
+.env
+.env.local
+.env.production
+.env.staging
+
+# Database files
 *.db
 *.sqlite3
 
-# Python
+# Python cache
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 .Python
-
-# Environment variables
-.env
-.env.*
 
 # IDE
 .vscode/
@@ -31,4 +32,6 @@ Thumbs.db
 
 # Logs
 *.log
-"@ | Set-Content .gitignore
+
+# Test artifacts
+test_sdk.py
